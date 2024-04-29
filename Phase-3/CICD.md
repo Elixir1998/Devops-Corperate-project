@@ -64,7 +64,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-               git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/jaiswaladi246/Boardgame.git'
+               git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/Elixir1998/Boardgame.git'
             }
         }
         
@@ -121,7 +121,7 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker build -t adijaiswal/boardshack:latest ."
+                            sh "docker build -t praveenpandala123/boardshack:latest ."
                     }
                }
             }
@@ -129,7 +129,7 @@ pipeline {
         
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html adijaiswal/boardshack:latest "
+                sh "trivy image --format table -o trivy-image-report.html praveenpandala123/boardshack:latest "
             }
         }
         
@@ -137,7 +137,7 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker push adijaiswal/boardshack:latest"
+                            sh "docker push praveenpandala123/boardshack:latest"
                     }
                }
             }
@@ -186,7 +186,7 @@ pipeline {
             emailext (
                 subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
                 body: body,
-                to: 'jaiswaladi246@gmail.com',
+                to: 'praveenpandala277@gmail.com',
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
                 mimeType: 'text/html',
