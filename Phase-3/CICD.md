@@ -121,7 +121,7 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker build -t praveenpandala123/boardshack:latest ."
+                            sh "docker build -t praveenpandala123/boardgame:latest ."
                     }
                }
             }
@@ -129,7 +129,7 @@ pipeline {
         
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html praveenpandala123/boardshack:latest "
+                sh "trivy image --format table -o trivy-image-report.html praveenpandala123/boardgame:latest "
             }
         }
         
@@ -137,7 +137,7 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker push praveenpandala123/boardshack:latest"
+                            sh "docker push praveenpandala123/boardgame:latest"
                     }
                }
             }
